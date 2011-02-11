@@ -1,0 +1,130 @@
+Let's add Autoconf to "Hello, world!"
+=====================================
+ 	  	
+Let's create "Hello, world!"
+--------------------------------
+First, we'll write a standard "Hello, world!" program:
+
+hello.c:
+		----------------------------------------------------
+		/* hello.c: A standard "Hello, world!" program */
+		#include <stdio.h>
+		int main(int argc, char* argv[]){
+		   printf("Hello, world!\n");
+		   return 0;
+		}
+		----------------------------------------------------
+
+With a simple Makefile:
+
+Makefile:
+		----------------------------------------------------
+		 # Makefile: A standard Makefile for hello.c
+
+		all: hello
+
+		clean:
+		   rm -f hello *.o
+		----------------------------------------------------
+		
+Let's try making our binaries:
+
+	$ ls
+	Makefile  hello.c
+	$ make
+	cc     hello.c   -o hello
+	$ ls
+	Makefile  hello*  hello.c
+	$ ./hello 
+	Hello, world!
+	$
+		
+No problem!
+
+Let's add Autoconf
+------------------
+Now, we'll add autoconf to this program. First, we create a file called "configure.ac". This file instructs Autoconf how to generate the "configure" script. (Autoconf 2.13 users: Create "configure.in"	 instead.)
+
+Creating this file by hand can be tedious, though. So Autoconf provides a program to create the file for you. This program is "autoscan":
+
+	$ autoscan
+	$ ls
+	Makefile  autoscan.log  configure.scan  hello*  hello.c
+	$
+		
+"autoscan" scans your sources and creates an appropriate "configure.ac"	 file. But notice it doesn't create "configure.ac" file directly. Instead, it creates a file called "configure.scan". We need to rename this file to "configure.ac":
+
+	$ mv configure.scan configure.ac   
+		
+Why doesn't "autoscan"	 create "configure.ac" directly? Well, you don't know this at the moment, but you'll be customizing "configure.ac"	 later. You don't want to accidentally overwrite "configure.ac", do you? So "autoscan" doesn't write to "configure.ac" directly.
+
+Anyway, now you can run "autoconf" to generate "configure":
+
+	$ autoconf
+	$ ls
+	Makefile         autoscan.log  configure.ac  hello.c
+	autom4te.cache/  configure*    hello*
+	$ 
+		
+Ignore all those extra files Autoconf creates. They are just intermediary files we don't need. Don't erase them, though -- Autoconf may use them later.
+
+We could now type "./configure", but not yet: "configure" is supposed to generate a new Makefile. But "configure" uses a file called "Makefile.in"	 to generate the new Makefile. So now we need a "Makefile.in".
+
+No sweat. "Makefile.in" is supposed to be a template for the new "Makefile". We'll simply rename "Makefile" to "Makefile.in" and worry about writing the proper version later:
+
+	$ mv Makefile Makefile.in
+	$ ls
+	Makefile.in      autoscan.log  configure.ac  hello.c
+	autom4te.cache/  configure*    hello*
+	$ 
+		
+	Now we're ready to run "./configure"	 and "make":
+
+	$ ./configure
+	checking for gcc... gcc
+	checking for C compiler default output... a.out
+	checking whether the C compiler works... yes
+	checking whether we are cross compiling... no
+	checking for suffix of executables... 
+	checking for suffix of object files... o
+	checking whether we are using the GNU C compiler... yes
+	checking whether gcc accepts -g... yes
+	configure: creating ./config.status
+	config.status: creating Makefile
+	config.status: creating config.h
+	config.status: error: cannot find input file: config.h.in
+	$ make clean all
+	rm -f hello
+	cc     hello.c   -o hello
+	$ ls
+	Makefile autom4te.cache/ config.log  configure*  hello*
+	Makefile.in  autoscan.log  config.status*  configure.ac hello.c
+	$ ./hello 
+	Hello, world!
+	$ 
+		
+Hey~ you did it! You've written your first Autoconf program!
+
+Well, sort of...
+
+You see, all you've done so far is making the program look like it's using Autoconf. In actuality, your program isn't any more portable than it was before. To do that, you'll need to customize your source files. That'll be the next chapter.
+
+Let's review
+--------------
+
+Let's review what we've done so far:
+
+1 Create the sources, Makefile, etc.
+2 Run "autoscan"	
+("autoscan" creates "configure.scan")
+3 Rename "configure.scan"	 to "configure.ac"
+4 Run "autoconf"	
+("autoconf" uses "configure.ac"	 to create "configure")
+5 Rename "Makefile"	 to "Makefile.in"	
+("configure"	 will use "Makefile.in"	 to create "Makefile")
+6 Run "./configure"	 and "make"
+Now, that seems like a lot. But in actuality, all you've learned to do is execute two programs in sequence, "autoscan" followed by "autoconf". The renaming of files is just a necessary evil.
+
+What's next?
+
+Now, let's try to make your program more portable by modifying your source files:

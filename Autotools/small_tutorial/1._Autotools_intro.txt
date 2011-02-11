@@ -1,0 +1,57 @@
+Autotools introduction
+=======================
+
+How to compile programs with Autotools
+--------------------------------------
+You've probably compiled programs that use Autotools before. When you compile these programs, you usually type these three commands:
+
+		./configure
+		make
+		make install
+		
+Sometimes you also add options to these three commands, but that's usually all you do to compile and install the program.
+Here, ./configure analyzes your system to see what kind of programs and libraries you have, so it knows how to build the program best. Then make does the actual building. Lastly, make install installs the program. Simple, right? We'll learn how to write our programs to compile this way.
+
+Parts of Autotools
+------------------
+Autotools is a collection of three tools:
+
+1.) Autoconf - This is used to generate the "configure" shell script. As I mentioned earlier, this is the script that analyzes your system at compile-time. For example, does your system use "cc" or "gcc"	 as the C compiler?
+
+2.) Automake - This is used to generate Makefiles. It uses information provided by Autoconf. For example, if your system has "gcc", it will use "gcc" in the Makefile. Or, if it finds "cc" instead, will use "cc" in the Makefile.
+
+3.) Libtool - This is used to create shared libraries, platform-independently.
+
+In our tutorial, we will not be covering Libtool because it is somewhat of a separate subject. Autoconf and Automake are more essential, so we will cover those instead.
+
+What you should know
+
+In this tutorial, I will assume a few things about you, the reader:
+
+You know how to write simple C programs.
+
+You know how to write simple Makefiles.
+
+You've successfully downloaded, compiled, and installed programs that use Autotools before.
+
+You've tried to create portable C programs before using lots of #ifdef and #ifndefs.
+
+Version differences
+--------------------
+A word of caution before we start: Autotools can behave quite differently from version-to-version. So your version of Autotools may act slightly differently than the version I am using.
+
+As of this writing, there are two popular versions of Autoconf: Versions 2.53 and 2.13. I will primarily be using Autoconf 2.53 in my illustrations since it is the latest version of Autoconf, and also because it's easier to use. But I will also point out the differences between these two versions so you can use either versions of Autoconf with the tutorial.
+
+To find out which version of Autoconf you're using, type:
+
+ $ autoscan --version
+autoscan (GNU Autoconf) 2.53
+...
+		
+(Yes, run "autoscan", not "autoconf".)
+
+As for Automake, I will be using Automake version 1.4-p4. This isn't the latest version of Automake as of this writing, but it is the standard version installed on the latest version of Debian Stable, 3.0r1.
+
+What's next?
+----------
+Now, let's write our first "Autotool-ized" program. We'll start this by writing a classic "Hello, world!" program, then applying Autoconf.

@@ -1,0 +1,71 @@
+Markdown
+========
+
+Version 1.0.2b7 - Tue 29 Aug 2006
+
+by John Gruber  
+<http://daringfireball.net/>
+
+
+Introduction
+------------
+
+available on the web: <http://daringfireball.net/projects/markdown/>.
+
+
+
+Installation and Requirements
+-----------------------------
+
+Markdown also requires the standard Perl library modules `Digest::MD5`
+
+
+### Movable Type ###
+
+Markdown works with Movable Type version 2.6 or later (including 
+
+1.  Copy the "Markdown.pl" file into your Movable Type "plugins"
+    this:
+
+        (mt home)/plugins/Markdown.pl
+
+2.  Once installed, Markdown will appear as an option in Movable Type's
+    Text Formatting pop-up menu. This is selectable on a per-post basis.
+
+
+By default, Markdown produces XHTML output for tags with empty elements.
+
+    <br />
+
+
+You need to use a special `MTMarkdownOptions` container tag in each
+
+    <MTMarkdownOptions output='html4'>
+        ... put your entry content here ...
+    </MTMarkdownOptions>
+
+opening tag right after your `<body>` tag, and the closing tag right
+
+    % perl Markdown.pl --html4tags foo.text
+
+
+Version History
+---------------
+
+1.0.2b1 (Mon 28 Feb 2005)
+
++   Fix for backticks within HTML tag: <span attr='`ticks`'>like this</span>
+
++   Fix for escaped backticks still triggering code spans:
+
+        There are two raw backticks here: \` and here: \`, not a code span
+
+
+1.0.1 (14 Dec 2004):
+
++   Changed the syntax rules for code blocks and spans. Previously,
+    
+    **IMPORTANT**: This may affect existing Markdown content if it
+    contains link definitions indented by 4 or more spaces.
+
+

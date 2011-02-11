@@ -1,0 +1,49 @@
+Metadata-Version: 1.0
+Name: Oplop
+Version: 1.6
+Summary: Generate account passwords based on account nicknames and a master password.
+Home-page: http://oplop.googlecode.com
+Author: Brett Cannon
+Author-email: brett@python.org
+License: UNKNOWN
+Download-URL: http://pypi.python.org/pypi/Oplop
+Description: CLI (Command Line Interface) and reference implementation of Oplop
+        ==================================================================
+        
+        Using a single master password and various nicknames, one can create an
+        infinite number of unique account passwords. These unique account passwords are
+        commonly called password hashes, domain-specific passwords, or per-site
+        passwords.
+        
+        The CLI implementation of Oplop is only one of many implementations. See the
+        `project home page <http://code.google.com/p/oplop/>`__ for the complete list
+        of available implementations of Oplop.
+        
+        
+        General
+        -------
+        
+        Project home page: http://code.google.com/p/oplop/
+        
+        What Oplop is: http://code.google.com/p/oplop/wiki/HowItWorks
+        
+        
+        CLI-specific
+        ------------
+        
+        Release Notes: http://code.google.com/p/oplop/wiki/CLIReleaseNotes
+        
+        Instructions: http://code.google.com/p/oplop/wiki/CLIInstructions
+        
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Security
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.1
